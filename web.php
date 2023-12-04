@@ -22,9 +22,13 @@ Route::get('login', [Controller::class, 'login'])->name('login');
 Route::post('loginVerify', [Controller::class, 'loginVerify'])->name('loginVerify');
 Route::get('register', [Controller::class, 'register'])->name('register');
 Route::post('store', [Controller::class, 'store'])->name('store');
-Route::get('index', [Controller::class, 'index'])->name('index');
-Route::get('logout', [Controller::class, 'logout'])->name('logout');
 
+Route::group(['middleware' => 'authUserCheck'], function () {
+
+    Route::get('index', [Controller::class, 'index'])->name('index');
+    Route::get('logout', [Controller::class, 'logout'])->name('logout');
+
+});
 
 
 
